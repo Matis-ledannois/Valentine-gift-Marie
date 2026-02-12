@@ -113,8 +113,10 @@
         .btn-no {
             background-color: var(--pastel-pink-dark);
             color: rgb(0, 0, 0);
-            position: absolute; /* Nécessaire pour le déplacer */
+            position: relative; /* Nécessaire pour le déplacer */
             transition: all 0.3s ease;
+            touch-action: none;
+           
             
         }
 
@@ -200,10 +202,7 @@
         // Déclencheur sur ordinateur (survol de la souris)
         noBtn.addEventListener('mouseover', moveButton);
         // Déclencheur sur mobile (au toucher)
-        noBtn.addEventListener('pointerdown', function(e) {
-            e.preventDefault(); // Empêche le clic
-            moveButton();
-        });
+       noBtn.addEventListener('touchstart', moveButton, {passive: false})
 
 
         // --- POINT 5 : CLIC SUR OUI (Confettis + Message) ---
