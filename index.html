@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour Mastar Kilo Max</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* --- POINT 1 : COULEURS ROSE PASTEL ET STYLE GIRLY --- */
+        :root {
+            --pastel-pink-bg: #ffe6ea;
+            --pastel-pink-dark: #ffc0cb;
+            --deep-rose: #d63384;
+            --soft-white: #fffbfc;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--pastel-pink-bg); 
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 38.89l-2.48-2.27C18.72 28.66 12.83 23.31 12.83 16.74c0-5.36 4.2-9.58 9.58-9.58 3.03 0 5.94 1.41 7.59 3.64 1.65-2.23 4.56-3.64 7.59-3.64 5.36 0 9.58 4.22 9.58 9.58 0 6.57-5.89 11.92-14.69 19.88L30 38.89z' fill='%23ffdae0' fill-opacity='0.4'/%3E%3C/svg%3E");
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden; /* Empêche le scroll horizontal si le bouton va trop loin */
+        }
+
+        .container {
+            background-color: var(--soft-white);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            border: 4px solid var(--pastel-pink-dark);
+        }
+
+        /* --- POINT 2 : SON PRÉNOM --- */
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--deep-rose);
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--deep-rose);
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        /* --- POINT 4 : ESPACE GIF --- */
+        .gif-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 3px dashed var(--pastel-pink-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff0f3;
+        }
+
+        .gif-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        /* --- LES BOUTONS --- */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+            min-height: 60px; /* Assure de l'espace pour le mouvement */
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Dancing Script', cursive;
+            font-weight: bold;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .btn-yes {
+            background-color: var(--deep-rose);
+            color: white;
+            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.4);
+           
+        }
+
+        .btn-yes:hover {
+            background-color: #b02a6c;
+            transform: scale(1.05);
+        }
+
+        /* Style du bouton fuyard */
+        .btn-no {
+            background-color: var(--pastel-pink-dark);
+            color: rgb(0, 0, 0);
+            position: absolute; /* Nécessaire pour le déplacer */
+            transition: all 0.3s ease;
+            
+        }
+
+        /* --- POINT 5 : MESSAGE SECRET --- */
+        #secret-message {
+            display: none; /* Caché au départ */
+            margin-top: 30px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .secret-content p {
+            font-size: 1.5em;
+            color: var(--deep-rose);
+            font-weight: bold;
+            font-family: 'Calibri', cursive;
+            background: var(--pastel-pink-bg);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px dotted var(--deep-rose);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        
+        .hidden {
+            display: none !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Coucou Marie !</h1>
+        <h2>J'ai une question importante...</h2>
+
+        <div class="gif-container">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExenh4eHd6aHh4eHd6aHh4eHd6aHh4eHd6aHh4eHd6aHh4eHd6aHh4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" alt="Cute GIF">
+        </div>
+
+        <h2>Veux-tu être ma Valentine ?</h2>
+
+        <div class="buttons" id="button-container">
+            <button class="btn btn-yes" id="yesBtn">Ouiiii ! 💖</button>
+            <button class="btn btn-no" id="noBtn">Non...</button>
+        </div>
+
+        <div id="secret-message">
+            <div class="secret-content">
+                <p>Trop hâte ! <br> RDV à 19h pour notre dîner en amoureux. 🌹✨</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const buttonContainer = document.getElementById('button-container');
+        const secretMessage = document.getElementById('secret-message');
+        const mainTitle = document.querySelector('h2'); // Sélectionne le "Veux-tu être..."
+
+        // --- POINT 3 : FAIRE FUIR LE BOUTON NON ---
+        // Fonction pour déplacer le bouton aléatoirement
+        function moveButton() {
+            // Calculer les limites de la fenêtre pour que le bouton reste visible
+            const maxX = window.innerWidth - noBtn.offsetWidth - 50;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 50;
+
+            // Générer des positions aléatoires
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            // Appliquer les nouvelles positions en utilisant 'fixed' pour sortir du flux normal
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        // Déclencheur sur ordinateur (survol de la souris)
+        noBtn.addEventListener('mouseover', moveButton);
+        // Déclencheur sur mobile (au toucher)
+        noBtn.addEventListener('pointerdown', function(e) {
+            e.preventDefault(); // Empêche le clic
+            moveButton();
+        });
+
+
+        // --- POINT 5 : CLIC SUR OUI (Confettis + Message) ---
+        yesBtn.addEventListener('click', function() {
+            // 1. Cacher les boutons et le titre de la question
+            buttonContainer.classList.add('hidden');
+            mainTitle.style.display = 'none';
+
+            // 2. Afficher le message secret
+            secretMessage.style.display = 'block';
+
+            // 3. Lancer la pluie de pétales de rose
+            triggerRoseConfetti();
+        });
+
+
+        // Fonction pour configurer les confettis "pétales de rose"
+        function triggerRoseConfetti() {
+            // Durée de l'animation
+            var duration = 3 * 5000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            // Fonction pour choisir une couleur aléatoire parmi une palette "rose"
+            function randomInRange(min, max) {
+              return Math.random() * (max - min) + min;
+            }
+
+            // Les couleurs des pétales (rouge, rose foncé, rose clair)
+            var roseColors = ['#d63384', '#ff0000', '#ffc0cb', '#e91e63'];
+
+            var interval = setInterval(function() {
+              var timeLeft = animationEnd - Date.now();
+
+              if (timeLeft <= 0) {
+                return clearInterval(interval);
+              }
+
+              var particleCount = 50 * (timeLeft / duration);
+              // Créer des jets de confettis depuis la gauche et la droite
+              confetti(Object.assign({}, defaults, { 
+                  particleCount, 
+                  origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                  colors: roseColors,
+                  shapes: ['circle', 'square'], // Mélange de formes pour un effet plus naturel
+                  scalar: randomInRange(0.8, 1.2) // Tailles variées
+              }));
+              confetti(Object.assign({}, defaults, { 
+                  particleCount, 
+                  origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                  colors: roseColors,
+                  shapes: ['circle', 'square'],
+                  scalar: randomInRange(0.8, 1.2)
+              }));
+            }, 250);
+        }
+    </script>
+</body>
+</html>
